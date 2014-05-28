@@ -20,7 +20,7 @@
     <h3><%= playlist.snippet.title %></h3>
     <p><%#= image_tag(playlist.snippet.thumbnails.medium.url) %>
     <p><%= playlist.snippet.description %></p>
-    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    <p><%= link_to "#{pluralize(playlist.contentDetails.itemCount, 'Video')} &raquo;".html_safe, "http://www.youtube.com/playlist?list=#{playlist.id}", class: "btn btn-default", role: "button" %></p>
   </div>
   <% end %>
 </div>

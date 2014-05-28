@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
     @playlists = client.execute!(
       :api_method => youtube.playlists.list,
       :parameters => {
-        :part => "snippet",
+        :part => "snippet, contentDetails",
         :channelId => ENV["CHANNEL_ID"],
         :maxResults => 10
       }
