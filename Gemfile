@@ -9,7 +9,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'faker', '1.3.0'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.10'
-gem 'youtube_it', '2.4.0'
+gem 'google-api-client', '0.7.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
