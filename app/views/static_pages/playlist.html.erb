@@ -13,7 +13,6 @@
   <% @videos.data.items.each do |video| %>
   <div class="col-md-4">
     <h3><%= video_title(video.snippet.title) %></h3>
-    <p><%#= image_tag(playlist.snippet.thumbnails.medium.url) %>
     <p><%= video.snippet.description %></p>
     <p><%= link_to "Watch &raquo;".html_safe, "http://www.youtube.com/watch?v=#{video.snippet.resourceId.videoId}", class: "btn btn-default", role: "button" %></p>
   </div>
