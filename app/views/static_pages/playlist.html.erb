@@ -1,0 +1,21 @@
+<% provide(:title, "#{playlist_title(@playlist.data.items.first.snippet.title)}") %>
+<div class="row">
+  <div class="col-md-12">
+    <h2><%= pluralize(@videos.data.pageInfo.totalResults, 'Video') %> for <%= playlist_title(@playlist.data.items.first.snippet.title) %></h2>
+    <% if @videos.data['prevPageToken'] %>
+      <%= link_to "Previous Page", playlist_path(@playlist.data.items.first.id, @videos.data.prevPageToken) %> | 
+    <% end %>
+    <% if @videos.data['nextPageToken'] %>
+      <%= link_to "Next Page", playlist_path(@playlist.data.items.first.id, @videos.data.nextPageToken) %><%= " | " if @videos.data['prevPageToken'] %>
+    <% end %>
+    <%= link_to "Index", playlist_path(@playlist.data.items.first.id) if (@videos.data['nextPageToken'] && @videos.data['prevPageToken']) || @videos.data['prevPageToken'] %>
+  </div>
+  <% @videos.data.items.each do |video| %>
+  <div class="col-md-4">
+    <h3><%= video_title(video.snippet.title) %></h3>
+    <p><%#= image_tag(playlist.snippet.thumbnails.medium.url) %>
+    <p><%= video.snippet.description %></p>
+    <p><%= link_to "Watch &raquo;".html_safe, "http://www.youtube.com/watch?v=#{video.snippet.resourceId.videoId}", class: "btn btn-default", role: "button" %></p>
+  </div>
+  <% end %>
+</div>

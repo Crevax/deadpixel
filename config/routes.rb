@@ -1,5 +1,7 @@
 DeadPixel::Application.routes.draw do
   root 'static_pages#home'
+  match '/playlist/:id(/page/:page_token)',  to: 'static_pages#playlist', via: 'get', as: 'playlist'
+  match '/watch/:id',  to: 'static_pages#watch', via: 'get', as: 'watch'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

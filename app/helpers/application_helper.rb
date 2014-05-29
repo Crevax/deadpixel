@@ -4,7 +4,7 @@ module ApplicationHelper
     def full_title(page_title)
       base_title = 'Dead Pixel'
         if page_title.empty?
-          base_title
+          "#{base_title} - We Like Games!"
         else
           "#{base_title} - #{page_title}"
         end
@@ -12,6 +12,16 @@ module ApplicationHelper
 
     # Returns a playlist title sans Dead Pixel:
     def playlist_title(title)
+      if title.empty?
+        "Unnamed"
+      else
+        title.slice! "Dead Pixel: "
+        title
+      end
+    end
+
+    # Returns a video title sans Dead Pixel:
+    def video_title(title)
       if title.empty?
         "Unnamed"
       else

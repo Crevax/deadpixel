@@ -30,4 +30,37 @@ class StaticPagesController < ApplicationController
     #  }
     #) 
   end
+
+  def playlist
+    client = Google::APIClient.new(
+      :application_name => "DeadPixel",
+      :application_version => "1.0",
+      :key => ENV["GOOGLE_API_KEY"],
+      :authorization => nil
+    )
+    youtube = client.discovered_api(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION)
+
+    @playlist = client.execute!(
+      :api_method => youtube.playlists.list,
+      :parameters => {
+        :part => "snippet",
+        :id => params[:id],
+        :maxResults => 1
+      }
+    )
+
+    @videos = client.execute!(
+      :api_method => youtube.playlist_items.list,
+      :parameters => {
+        :part => "snippet",
+        :playlistId => params[:id],
+        :maxResults => 6,
+        :pageToken => params[:page_token]
+      }
+    )
+  end
+
+  def watch
+
+  end
 end
