@@ -61,6 +61,20 @@ class StaticPagesController < ApplicationController
   end
 
   def watch
+    client = Google::APIClient.new(
+      :application_name => "DeadPixel",
+      :application_version => "1.0",
+      :key => ENV["GOOGLE_API_KEY"],
+      :authorization => nil
+    )
+    youtube = client.discovered_api(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION)
 
+    @video = client.execute!(
+      :api_method => youtube.videos.list,
+      :parameters => {
+        :part => "snippet",
+        :id => params[:id]
+      }
+    )
   end
 end
