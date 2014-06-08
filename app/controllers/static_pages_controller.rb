@@ -21,14 +21,6 @@ class StaticPagesController < ApplicationController
         :maxResults => 10
       }
     )
-    ##
-    #@video = client.execute!(
-    #  :api_method => youtube.videos.list,
-    #  :parameters => {
-    #    :part => "snippet",
-    #    :id => "8L5pg8H_m-I"
-    #  }
-    #) 
   end
 
   def playlist
@@ -48,6 +40,10 @@ class StaticPagesController < ApplicationController
         :maxResults => 1
       }
     )
+
+    if @playlist.data.items.first.snippet.channelId != ENV["CHANNEL_ID"]
+      render(:file => File.join(Rails.root, 'public/406.html'), :status => 406, :layout => false)
+    end
 
     @videos = client.execute!(
       :api_method => youtube.playlist_items.list,
@@ -76,5 +72,9 @@ class StaticPagesController < ApplicationController
         :id => params[:id]
       }
     )
+
+    if @video.data.items.first.snippet.channelId != ENV["CHANNEL_ID"]
+      render(:file => File.join(Rails.root, 'public/406.html'), :status => 406, :layout => false)
+    end
   end
 end
